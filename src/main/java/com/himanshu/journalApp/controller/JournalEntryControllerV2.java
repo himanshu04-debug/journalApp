@@ -1,7 +1,9 @@
 package com.himanshu.journalApp.controller;
 
 import com.himanshu.journalApp.Entity.JournalEntry;
+import com.himanshu.journalApp.Entity.User;
 import com.himanshu.journalApp.Services.JournalEntryService;
+import com.himanshu.journalApp.Services.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,17 +19,19 @@ import java.util.*;
 public class JournalEntryControllerV2 {
     @Autowired
     private JournalEntryService journalEntryService;
-
+    @Autowired
+    private UserService userService;
 
     @GetMapping
-    public ResponseEntity<?> getAll(){
-        List<JournalEntry> all=journalEntryService.getAll();
+    public ResponseEntity<?> getAllJournalEntriesOfUser(@PathVariable String username){
+        User user = userService.findByUserName(username);
+        List<JournalEntry> all=user.getJournalEntries();
         if(all!=null&& !all.isEmpty()){
             return new ResponseEntity<>(all,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @PostMapping
+    @PostMapping("{/username}")
     public ResponseEntity<JournalEntry> createEntry(@RequestBody JournalEntry myEntry){
         try {
             myEntry.setDate(LocalDateTime.now());
