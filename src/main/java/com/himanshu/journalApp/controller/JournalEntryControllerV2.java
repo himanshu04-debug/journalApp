@@ -63,7 +63,6 @@ public class JournalEntryControllerV2 {
 //            journalEntryService.saveEntry(old, user);
 //            return new ResponseEntity<>(old,HttpStatus.OK);
 //        }
-
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
