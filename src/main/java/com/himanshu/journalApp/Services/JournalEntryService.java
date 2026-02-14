@@ -31,13 +31,18 @@ public class JournalEntryService {
 
             journalEntry.setDate(LocalDateTime.now());
         JournalEntry saved = journalEntryRepository.save(journalEntry);
-
-
     }
+    public void saveEntry(JournalEntry journalEntry){
+        journalEntryRepository.save(journalEntry);
+    }
+
     public Optional<JournalEntry> findById(ObjectId id){
         return journalEntryRepository.findById(id);
     }
-    public void deleteById(ObjectId id){
+    public void deleteById(ObjectId id, String username){
+        User user = userService.findByUserName(username);
+        user.getJournalEntries().removeIf(x->x.getId().equals(id));//to remove references from other collections
+        userService.saveEntry(user);//updated user
         journalEntryRepository.deleteById(id);
     }
 
