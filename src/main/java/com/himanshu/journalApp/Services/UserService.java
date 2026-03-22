@@ -17,16 +17,14 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public void saveEntry(User user){
-        try{
+
+    public void saveNewEntry(User user){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRoles(Arrays.asList("USER"));
             userRepository.save(user);
-        }catch (Exception e){
-            //log.error("Exception", e);
-        }
-
-
+    }
+    public void saveUser(User user){
+        userRepository.save(user);
     }
     private static final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
     public void saveNewUser(User user){

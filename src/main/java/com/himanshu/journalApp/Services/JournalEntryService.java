@@ -26,7 +26,7 @@ public class JournalEntryService {
             journalEntry.setDate(LocalDateTime.now());
             JournalEntry saved = journalEntryRepository.save(journalEntry);//local entries saved huyi hai yaha pr local variable mei
             user.getJournalEntries().add(saved);
-            userService.saveEntry(user);//user is getting saved here
+            userService.saveUser(user);//user is getting saved here
         } catch (Exception e) {
             System.out.println(e);
             throw new RuntimeException("An error occurred while saving the entity",e);
@@ -52,4 +52,7 @@ public class JournalEntryService {
     public List<JournalEntry> getAll() {
         return journalEntryRepository.findAll();
     }
+//    public List<JournalEntry> findByUsername(String username){
+//
+//    }
 }
