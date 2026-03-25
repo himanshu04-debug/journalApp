@@ -45,7 +45,7 @@ public class JournalEntryService {
     public void deleteById(ObjectId id, String username){
         User user = userService.findByUserName(username);
         user.getJournalEntries().removeIf(x->x.getId().equals(id));//to remove references from other collections
-        userService.saveEntry(user);//updated user
+        userService.saveUser(user);//updated user
         journalEntryRepository.deleteById(id);
     }
 

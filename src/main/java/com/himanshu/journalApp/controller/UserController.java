@@ -30,10 +30,10 @@ public class UserController {
         return userService.getAll();
     }
     @PostMapping
-    public void createUser(@RequestBody User user){
+    /*public void createUser(@RequestBody User user){
         userService.saveEntry(user);
-    }
-    @PutMapping("")
+    }*/
+    @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User user){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -41,7 +41,7 @@ public class UserController {
         if(userInDb!=null){
             userInDb.setUsername(user.getUsername());
             userInDb.setPassword(user.getPassword());
-            userService.saveEntry(userInDb);
+            userService.saveNewUser(userInDb);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
