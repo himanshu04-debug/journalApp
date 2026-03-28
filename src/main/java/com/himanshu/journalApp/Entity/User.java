@@ -25,4 +25,6 @@ public class User {
     @DBRef
     private List<JournalEntry> journalEntries=new ArrayList<>();//khali list hoi..null nhi hoga
     private List<String> roles;//kya kya role perform krega user(Authorisation)
+
+
 }
