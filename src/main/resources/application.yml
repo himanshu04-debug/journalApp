@@ -1,10 +1,15 @@
-#spring:
-#  data:
-#     uri: mongodb+srv://hmidha04_db_user:nbEzuPm0BYhwgqKJ@cluster0.du86co2.mongodb.net/?appName=Cluster0
-#     database: journaldb
-#     auto-index-correction: true
-#
-#server:
-#  port: 8081
-#  servlet:
-#    context-path: /journal
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://hmidha04_db_user:nbEzuPm0BYhwgqKJ@cluster0.du86co2.mongodb.net/?appName=Cluster0
+      database: journaldb
+      auto-index-creation: true
+  main:
+    allow-circular-references: true
+
+
+
+server:
+  port: 8080
+  servlet:
+    context-path: /journal
