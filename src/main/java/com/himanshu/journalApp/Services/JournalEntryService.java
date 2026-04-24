@@ -19,6 +19,7 @@ public class JournalEntryService {
     @Autowired
     private UserService userService;
 
+
     @Transactional
     public void saveEntry(JournalEntry journalEntry, String username){
         try{
@@ -28,7 +29,6 @@ public class JournalEntryService {
             user.getJournalEntries().add(saved);
             userService.saveUser(user);//user is getting saved here
         } catch (Exception e) {
-            System.out.println(e);
             throw new RuntimeException("An error occurred while saving the entity",e);
         }
 
@@ -53,7 +53,7 @@ public class JournalEntryService {
                 journalEntryRepository.deleteById(id);
             }
         }catch (Exception e){
-            System.out.println(e);
+
             throw new RuntimeException("An error occured while deleting the entry..", e);
         }
         return removed;

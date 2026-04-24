@@ -3,6 +3,8 @@ package com.himanshu.journalApp.Services;
 import com.himanshu.journalApp.Entity.User;
 import com.himanshu.journalApp.Repository.UserRepository;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +20,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    private static final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+
+    private static final Logger logger= LoggerFactory.getLogger(UserService.class);
 
     public void saveNewEntry(User user){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -27,7 +32,7 @@ public class UserService {
     public void saveUser(User user){
         userRepository.save(user);
     }
-    private static final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+
     public boolean saveNewUser(User user){
         try{
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -37,6 +42,7 @@ public class UserService {
             return true;
 
         } catch (Exception e) {
+            logger.info("hahahahahahahaha");
             return false;
         }
 
