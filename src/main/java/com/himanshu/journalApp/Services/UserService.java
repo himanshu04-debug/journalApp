@@ -2,6 +2,7 @@ package com.himanshu.journalApp.Services;
 
 import com.himanshu.journalApp.Entity.User;
 import com.himanshu.journalApp.Repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,13 +17,14 @@ import java.util.List;
 import java.util.Optional;
 @Service
 @Component
+@Slf4j
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
     private static final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 
-    private static final Logger logger= LoggerFactory.getLogger(UserService.class);
+
 
     public void saveNewEntry(User user){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -42,7 +44,8 @@ public class UserService {
             return true;
 
         } catch (Exception e) {
-            logger.info("hahahahahahahaha");
+            log.error("Error occured for {}",user.getUsername(),e);
+            log.info("hahahahahahahaha");
             return false;
         }
 

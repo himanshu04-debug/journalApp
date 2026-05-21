@@ -20,6 +20,7 @@ public class JournalEntryService {
     private UserService userService;
 
 
+
     @Transactional
     public void saveEntry(JournalEntry journalEntry, String username){
         try{
